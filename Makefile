@@ -4,7 +4,7 @@ OBJS =		src/main.o
 
 LIBS =
 
-TARGET =	dst/eagel.exe
+TARGET =	dst/eagel
 
 $(TARGET):	$(OBJS)
 	$(CXX) -o $(TARGET) $(OBJS) $(LIBS)
