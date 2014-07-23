@@ -1,8 +1,11 @@
-#ifndef MAIN_HH_
-#define MAIN_HH_
+#ifndef EAGEL_MAIN_HH_
+#define EAGEL_MAIN_HH_
 
+namespace eagel {
 
+class main {
+};
 
+} /* namespace eagel */
 
-
-#endif /* MAIN_HH_ */
+#endif /* EAGEL_MAIN_HH_ */
