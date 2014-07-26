@@ -1,4 +1,4 @@
-CXXFLAGS =	-O2 -g -Wall -fmessage-length=0 -Ilib/boost/inc -Iinc
+CXXFLAGS = -std=c++11	-O2 -g -Wall -fmessage-length=0 -Ilib/boost/inc -Iinc
 
 OBJS =		src/main.o
 
@@ -10,13 +10,13 @@ TEST_LIBS = lib/boost/lib/libboost_unit_test_framework.a
 
 TARGET =
 
-TEST_TARGET = dst/main_tests
+TEST_TARGET = dst/tests
 
 $(TARGET):	$(OBJS)
 	$(CXX) -o $(TARGET) $(OBJS) $(LIBS)
 
 $(TEST_TARGET): $(OBJS) $(TEST_OBJS)
-	$(CXX) -o $(TEST_TARGET) $(OBJS) $(LIBS) $(TEST_OBJS) $(TEST_LIBS)
+	$(CXX) -o $(TEST_TARGET) $(TEST_OBJS) $(OBJS) $(LIBS) $(TEST_LIBS)
 
 all:	$(TARGET) $(TEST_TARGET)
 
