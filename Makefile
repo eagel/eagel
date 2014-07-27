@@ -6,6 +6,7 @@ OBJS =		src/main.o\
 			src/transport/basic_transport.o
 
 TEST_OBJS = tst/main_tests.o\
+			tst/message/data_tests.o\
 			tst/message/message_tests.o\
 			tst/transport/transport_tests.o
 

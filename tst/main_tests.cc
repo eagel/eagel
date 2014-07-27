@@ -7,6 +7,9 @@
 using namespace std;
 using namespace eagel;
 
+/*
+ * check the version is corrected.
+ */
 BOOST_AUTO_TEST_CASE( eagel_main_version ) {
 	BOOST_CHECK(string("0") == main::MAJOR_VERSION);
 	BOOST_CHECK(string("0") == main::MINOR_VERSION);
