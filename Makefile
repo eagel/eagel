@@ -1,6 +1,7 @@
 CXXFLAGS = -std=c++11	-O2 -g -Wall -fmessage-length=0 -Ilib/boost/inc -Iinc
 
 OBJS =		src/main.o\
+			src/message/basic_data.o\
 			src/message/basic_message.o\
 			src/transport/basic_transport.o
 
