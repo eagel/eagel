@@ -1,13 +1,11 @@
 #ifndef EAGEL_MAIN_HH_
 #define EAGEL_MAIN_HH_
 
-#include <exception>
 #include <string>
 
 namespace eagel {
 
-class main
-final {
+class main final {
 	public:
 		static const std::string MAJOR_VERSION;
 		static const std::string MINOR_VERSION;
@@ -16,14 +14,12 @@ final {
 
 		static const std::string VERSION;
 
-		main();
-		~main();
-
-		void execute() throw (std::exception);
-
 	private:
+		main();
+		main(const main&);
+		main & operator =(const main &);
 	};
 
-	} /* namespace eagel */
+} /* namespace eagel */
 
 #endif /* EAGEL_MAIN_HH_ */

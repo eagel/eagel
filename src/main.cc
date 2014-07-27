@@ -11,17 +11,4 @@ const std::string main::VERSION = main::MAJOR_VERSION + "."
 		+ main::MINOR_VERSION + "." + main::MICRO_VERSION + "."
 		+ main::QUALIFIER;
 
-main::main() {
-	// create
-}
-
-main::~main() {
-	// destroy
-}
-
-void main::execute() throw (std::exception) {
-	// begin
-	// end
-}
-
 } /* namespace eagel */
