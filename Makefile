@@ -1,13 +1,11 @@
 CXXFLAGS = -std=c++11	-O2 -g -Wall -fmessage-length=0 -Ilib/boost/inc -Iinc
 
 OBJS =		src/main.o\
-			src/message/basic_data.o\
-			src/message/basic_message.o\
+			src/data/basic_data.o\
 			src/transport/basic_transport.o
 
 TEST_OBJS = tst/main_tests.o\
-			tst/message/data_tests.o\
-			tst/message/message_tests.o\
+			tst/data/data_tests.o\
 			tst/transport/transport_tests.o
 
 LIBS =		lib/boost/lib/libboost_system.a
