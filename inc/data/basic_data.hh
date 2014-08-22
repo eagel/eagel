@@ -3,6 +3,8 @@
 
 #include <vector>
 
+#include "data_exception.hh"
+
 namespace eagel {
 namespace data {
 
@@ -77,39 +79,45 @@ public:
 	 */
 	typedef unsigned char * type_a;
 
-	basic_data();
-	basic_data(const basic_data &);
-	basic_data(const basic_data &&);
-	basic_data(const script &);
-	basic_data(const serialized &);
+	basic_data() noexcept;
+	basic_data(const basic_data &) noexcept;
+	basic_data(const basic_data &&) noexcept;
+	/*
+	 * data_exception: means the script have error.
+	 */
+	basic_data(const script &) throw (data_exception);
+	/*
+	 * data_exception: means the serialized data is invalid.
+	 */
+	basic_data(const serialized &) throw (data_exception);
 	virtual ~basic_data() = 0;
 
-	virtual basic_data & operator=(const basic_data &) = 0;
+	virtual basic_data & operator=(const basic_data &) const noexcept = 0;
 
 	/*
 	 * convert data to string(script status)
 	 */
-	virtual operator script() const = 0;
+	virtual operator script() const noexcept = 0;
 	/*
 	 * convert data to byte array(serialized status)
 	 */
-	virtual operator serialized() const = 0;
+	virtual operator serialized() const noexcept = 0;
 
-	virtual operator type_i8() const = 0;
-	virtual operator type_i16() const = 0;
-	virtual operator type_i32() const = 0;
-	virtual operator type_i64() const = 0;
+	virtual operator type_i8() const throw (data_exception) = 0;
+	virtual operator type_i16() const throw (data_exception) = 0;
+	virtual operator type_i32() const throw (data_exception) = 0;
+	virtual operator type_i64() const throw (data_exception) = 0;
 
-	virtual operator type_u8() const = 0;
-	virtual operator type_u16() const = 0;
-	virtual operator type_u32() const = 0;
-	virtual operator type_u64() const = 0;
+	virtual operator type_u8() const throw (data_exception) = 0;
+	virtual operator type_u16() const throw (data_exception) = 0;
+	virtual operator type_u32() const throw (data_exception) = 0;
+	virtual operator type_u64() const throw (data_exception) = 0;
 
-	virtual operator type_f32() const = 0;
-	virtual operator type_f64() const = 0;
+	virtual operator type_f32() const throw (data_exception) = 0;
+	virtual operator type_f64() const throw (data_exception) = 0;
 
-	virtual operator type_s() const = 0;
-	virtual operator type_a() const = 0;
+	virtual operator type_s() const throw (data_exception) = 0;
+	virtual operator type_a() const throw (data_exception) = 0;
 };
 
 } /* namespace data */

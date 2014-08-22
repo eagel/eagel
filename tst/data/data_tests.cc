@@ -3,6 +3,7 @@
 #include <boost/test/unit_test.hpp>
 
 #include "data/basic_data.hh"
+#include "data/data_exception.hh"
 
 using namespace std;
 using namespace eagel;
@@ -41,4 +42,11 @@ BOOST_AUTO_TEST_CASE( eagel_data_types ) {
 
 	BOOST_REQUIRE(8 == sizeof(basic_data::type_f64));
 	BOOST_REQUIRE(is_signed<basic_data::type_f64>::value);
+}
+
+/*
+ * test data exception
+ */
+BOOST_AUTO_TEST_CASE( eagel_data_exception ) {
+	BOOST_CHECK(string("data_exception: some message.") == string(data_exception("some message.").what()));
 }
