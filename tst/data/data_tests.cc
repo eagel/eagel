@@ -4,6 +4,7 @@
 
 #include "data/basic_data.hh"
 #include "data/data_exception.hh"
+#include "data/i8.hh"
 
 using namespace std;
 using namespace eagel;
@@ -49,4 +50,10 @@ BOOST_AUTO_TEST_CASE( eagel_data_types ) {
  */
 BOOST_AUTO_TEST_CASE( eagel_data_exception ) {
 	BOOST_CHECK(string("data_exception: some message.") == string(data_exception("some message.").what()));
+}
+
+/*
+ * test i8
+ */
+BOOST_AUTO_TEST_CASE( eagel_data_i8 ) {
 }

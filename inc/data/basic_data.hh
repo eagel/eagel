@@ -90,9 +90,9 @@ public:
 	 * data_exception: means the serialized data is invalid.
 	 */
 	basic_data(const serialized &) throw (data_exception);
-	virtual ~basic_data() = 0;
+	virtual ~basic_data() noexcept;
 
-	virtual basic_data & operator=(const basic_data &) const noexcept = 0;
+	virtual basic_data & operator=(const basic_data &) throw(data_exception) = 0;
 
 	/*
 	 * convert data to string(script status)

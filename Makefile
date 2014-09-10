@@ -5,7 +5,8 @@ OBJS =		src/main.o\
 			src/data/basic_data.o\
 			src/data/reference.o\
 			src/data/list.o\
-			src/data/map.o
+			src/data/map.o\
+			src/data/i8.o
 
 TEST_OBJS = tst/main_tests.o\
 			tst/data/data_tests.o
