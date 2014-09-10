@@ -45,6 +45,7 @@ public:
 	virtual operator type_f32() const throw (data_exception) override;
 	virtual operator type_f64() const throw (data_exception) override;
 
+	virtual operator type_b() const throw (data_exception) override;
 	virtual operator type_s() const throw (data_exception) override;
 	virtual operator type_a() const throw (data_exception) override;
 private:

@@ -71,6 +71,10 @@ public:
 	typedef double type_f64;
 
 	/*
+	 * boolean data type
+	 */
+	typedef bool type_b;
+	/*
 	 * string data type
 	 */
 	typedef char * type_s;
@@ -116,6 +120,7 @@ public:
 	virtual operator type_f32() const throw (data_exception) = 0;
 	virtual operator type_f64() const throw (data_exception) = 0;
 
+	virtual operator type_b() const throw (data_exception) = 0;
 	virtual operator type_s() const throw (data_exception) = 0;
 	virtual operator type_a() const throw (data_exception) = 0;
 };

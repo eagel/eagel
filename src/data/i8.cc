@@ -92,6 +92,10 @@ i8::operator i8::type_f64() const throw (data_exception) {
 	return _value;
 }
 
+i8::operator i8::type_b() const throw (data_exception) {
+	throw data_exception("can not from i8 to type_b");
+}
+
 i8::operator i8::type_s() const throw (data_exception) {
 	throw data_exception("can not from i8 to type_s");
 }
