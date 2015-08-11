@@ -1,5 +1,5 @@
-#ifndef EAGEL_Eagel_HH_
-#define EAGEL_Eagel_HH_
+#ifndef EAGEL_EAGEL_HH_
+#define EAGEL_EAGEL_HH_
 
 #include <string>
 
@@ -22,4 +22,4 @@ class Eagel final {
 
 } /* namespace eagel */
 
-#endif /* EAGEL_Eagel_HH_ */
+#endif /* EAGEL_EAGEL_HH_ */

@@ -1,9 +1,11 @@
 CXXFLAGS = -std=c++11	-O2 -g -Wall -fmessage-length=0 -Iinc
 
 OBJS =		src/Eagel.o\
+			src/Record.o\
 
 TEST_OBJS = tst/main.o\
 			tst/Eagel.o\
+			tst/Record.o\
 
 TARGET =
 

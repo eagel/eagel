@@ -73,9 +73,9 @@ protected:                                            \
 } TestCase_##case_name(#case_name);                   \
 void case_name::run()throw (TestException)
 
-#define TEST_CHECK(test_condition)      \
-if(!(test_condition)){                                  \
-	throw TestException(#test_condition);               \
+#define TEST_CHECK(test_condition)                    \
+if(!(test_condition)){                                \
+	throw TestException(#test_condition);             \
 }
 
 #endif
