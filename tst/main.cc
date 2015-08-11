@@ -1,20 +1,36 @@
-#include <Eagel.hh>
+#include "main.hh"
 
-#define BOOST_AUTO_TEST_MAIN
-
-#include <boost/test/unit_test.hpp>
+#include <iostream>
 
 using namespace std;
-using namespace eagel;
 
-/*
- * check the version is corrected.
- */
-BOOST_AUTO_TEST_CASE( eagel_Main_version ) {
-	BOOST_CHECK(string("0") == Eagel::MAJOR_VERSION);
-	BOOST_CHECK(string("0") == Eagel::MINOR_VERSION);
-	BOOST_CHECK(string("0") == Eagel::MICRO_VERSION);
-	BOOST_CHECK(string("DEV") == Eagel::QUALIFIER);
-	BOOST_CHECK(string("0.0.0.DEV") == Eagel::VERSION);
+list<TestCase *> testCases;
+
+int main(int argc, char * argv[]) {
+	int tested = 0;
+	int success = 0;
+	int failure = 0;
+
+	for (list<TestCase *>::iterator it = testCases.begin();
+			it != testCases.end(); ++it) {
+		TestCase *testCase = *it;
+		testCase->execute();
+
+		++tested;
+
+		cout << (testCase->success() ? "success: " : "failure: ")
+				<< testCase->name() << ": " << testCase->message() << endl;
+
+		if (testCase->success()) {
+			++success;
+		} else {
+			++failure;
+		}
+	}
+
+	cout << "-------------------------------------------" << endl;
+	cout << "tested: " << tested << endl;
+	cout << "success: " << success << endl;
+	cout << "failure: " << failure << endl;
+	return 0;
 }
-
