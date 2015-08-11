@@ -1,4 +1,4 @@
-CXXFLAGS = -std=c++11	-O2 -g -Wall -fmessage-length=0 -Ilib/boost/inc -Iinc
+CXXFLAGS = -std=c++11	-O2 -g -Wall -fmessage-length=0 -Iinc
 
 OBJS =		src/Eagel.o\
 

@@ -1,4 +1,4 @@
-#include "../inc/Eagel.hh"
+#include "Eagel.hh"
 
 namespace eagel {
 
