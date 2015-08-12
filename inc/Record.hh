@@ -8,7 +8,12 @@ namespace eagel {
 class Record {
 public:
 	Record(const std::string &key, const std::string &value);
+	Record(const Record & record);
+	Record(const Record && record);
 	~Record();
+
+	Record & operator=(const Record & record);
+	Record & operator=(const Record && record);
 
 	std::string key();
 	std::string value();

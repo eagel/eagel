@@ -24,7 +24,7 @@ private:
 class TestCase {
 public:
 	TestCase(std::string name) :
-			_message("success"), _success(true), _name(name) {
+			_message("OK"), _success(true), _name(name) {
 		testCases.push_back(this);
 	}
 
