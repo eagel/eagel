@@ -1,8 +1,13 @@
 #include "eagel.hh"
 
-#include <iostream>
+#include "exception.hh"
 
 using namespace std;
 
 namespace ea {
+
+void eagel::initalize() {
+	throw exception("TODO");
+}
+
 } /* namespace ea */

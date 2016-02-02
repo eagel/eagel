@@ -1,13 +1,19 @@
-#ifndef EAGEL_HH_
-#define EAGEL_HH_
+#ifndef EA_EAGEL_HH_
+#define EA_EAGEL_HH_
 
 namespace ea {
 
 class eagel {
 public :
+	static char * version();
+	static int majorVersion();
+	static int minorVersion();
+	static int microVersion();
+	static char * qualifierVersion();
 
+	static void initalize();
 };
 
 } /* namespace ea */
 
-#endif /* EAGEL_HH_ */
+#endif /* EA_EAGEL_HH_ */
