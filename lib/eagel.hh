@@ -4,6 +4,8 @@
 namespace ea {
 
 class eagel {
+public :
+
 };
 
 } /* namespace ea */
