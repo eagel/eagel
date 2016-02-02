@@ -1,4 +1,4 @@
-bin_PROGRAMS=eagel
-eagel_SOURCES=main.cc
-eagel_CPPFLAGS = -I$(srcdir)/../lib
-eagel_LDADD = ../lib/libeagel.la
+bin_PROGRAMS=ea
+ea_SOURCES=ea.cc
+ea_CPPFLAGS = -I$(srcdir)/../lib
+ea_LDADD = ../lib/libeagel.la

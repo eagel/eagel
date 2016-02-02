@@ -4,5 +4,5 @@
 
 using namespace std;
 
-namespace eagel {
-} /* namespace eagel */
+namespace ea {
+} /* namespace ea */

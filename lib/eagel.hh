@@ -1,11 +1,11 @@
 #ifndef EAGEL_HH_
 #define EAGEL_HH_
 
-namespace eagel {
+namespace ea {
 
 class eagel {
 };
 
-} /* namespace eagel */
+} /* namespace ea */
 
 #endif /* EAGEL_HH_ */
