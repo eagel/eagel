@@ -1,5 +1,8 @@
 #include "eagel.hh"
 
-namespace eagel {
+#include <iostream>
 
+using namespace std;
+
+namespace eagel {
 } /* namespace eagel */
