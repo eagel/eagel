@@ -14,7 +14,7 @@ exception::exception(const char * const &message) :
 exception::exception(const exception &e) :
 		_message(strcpy(new char[strlen(e._message)], e._message)) {
 }
-exception::exception(const exception &&e) :
+exception::exception(exception &&e) :
 		_message(e._message) {
 	e._message = nullptr;
 }
@@ -29,15 +29,15 @@ const exception & exception::operator =(const exception &e) {
 		delete _message;
 	}
 	_message = strcpy(new char[strlen(e._message)], e._message);
-	return &this;
+	return *this;
 }
-const exception & exception::operator =(const exception &&e) {
+const exception & exception::operator =(exception &&e) {
 	if (nullptr != _message) {
 		delete _message;
 	}
 	_message = e._message;
 	e._message = nullptr;
-	return &this;
+	return *this;
 }
 
 const char * exception::message() {

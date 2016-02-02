@@ -1,5 +1,3 @@
-AM_CXXFLAGS = -std=c++11
-
 ACLOCAL_AMFLAGS = -I m4
 
 SUBDIRS=lib src

@@ -1,6 +1,8 @@
 #ifndef EA_EAGEL_HH_
 #define EA_EAGEL_HH_
 
+#include "exception.hh"
+
 namespace ea {
 
 class eagel {
