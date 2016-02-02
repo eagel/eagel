@@ -1,6 +1,9 @@
 #ifndef EA_EAGEL_HH_
 #define EA_EAGEL_HH_
 
+/*
+ *	include the all headers for library.
+ */
 #include "exception.hh"
 
 namespace ea {
@@ -11,7 +14,6 @@ public :
 	static int majorVersion();
 	static int minorVersion();
 	static int microVersion();
-	static char * qualifierVersion();
 
 	static void initalize();
 };

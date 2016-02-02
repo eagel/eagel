@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.59)
-AC_INIT(eagel, 1.0.0, eage@me.com)
+AC_INIT(eagel, 0.0.1, eage@me.com)
 AC_CONFIG_MACRO_DIR(m4)
 
 AC_CANONICAL_SYSTEM
