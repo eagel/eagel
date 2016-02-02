@@ -3,6 +3,6 @@
 #include <iostream>
 
 int main(int argc, char *argv[]) {
-	ea::eagel::initalize();
+	ea::eagel::initialize();
 	return 0;
 }

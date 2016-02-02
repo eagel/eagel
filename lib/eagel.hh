@@ -15,7 +15,7 @@ public :
 	static int minorVersion();
 	static int microVersion();
 
-	static void initalize();
+	static void initialize();
 };
 
 } /* namespace ea */

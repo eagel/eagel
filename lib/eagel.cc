@@ -8,9 +8,9 @@ using namespace std;
 
 namespace ea {
 
+bool _intialized = false;
 
-
-void eagel::initalize() {
+void eagel::initialize() {
 	throw exception("TODO");
 }
 
