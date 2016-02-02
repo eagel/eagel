@@ -10,12 +10,15 @@ namespace ea {
 
 class eagel {
 public :
-	static char * version();
+	static const char * name();
+
+	static const char * version();
 	static int majorVersion();
 	static int minorVersion();
 	static int microVersion();
 
 	static void initialize();
+	static bool isInitialized();
 };
 
 } /* namespace ea */
