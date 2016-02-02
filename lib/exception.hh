@@ -14,7 +14,7 @@ public:
 
 	const exception & operator =(const exception &e);
 	const exception & operator =(const exception &&e);
-	char * message();
+	const char * message();
 };
 
 } /* namespace ea */

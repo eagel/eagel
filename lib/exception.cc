@@ -40,7 +40,7 @@ const exception & exception::operator =(const exception &&e) {
 	return &this;
 }
 
-char * exception::message() {
+const char * exception::message() {
 	if (nullptr == _message) {
 		return "";
 	} else {
