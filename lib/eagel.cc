@@ -7,7 +7,7 @@
 
 using namespace std;
 
-namespace ea {
+namespace {
 
 bool _intialized = false;
 
@@ -16,6 +16,10 @@ const char *_version = nullptr;
 int _majorVersion = -1;
 int _minorVersion = -1;
 int _microVersion = -1;
+
+}
+
+namespace ea {
 
 void eagel::initialize() {
 	if (_intialized) {
@@ -46,7 +50,7 @@ bool eagel::isInitialized() {
 	return _intialized;
 }
 
-const char * eagel::name(){
+const char * eagel::name() {
 	return _name;
 }
 

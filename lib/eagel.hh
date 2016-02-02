@@ -5,6 +5,7 @@
  *	include the all headers for library.
  */
 #include "exception.hh"
+#include "arguments.hh"
 
 namespace ea {
 

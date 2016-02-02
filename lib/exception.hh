@@ -10,11 +10,11 @@ public:
 	exception(const char * const &message);
 	exception(const exception &e);
 	exception(exception &&e);
-	~exception();
+	virtual ~exception();
 
-	const exception & operator =(const exception &e);
-	const exception & operator =(exception &&e);
-	const char * message();
+	virtual exception & operator =(const exception &e);
+	virtual exception & operator =(exception &&e);
+	virtual const char * message();
 };
 
 } /* namespace ea */

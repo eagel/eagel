@@ -24,14 +24,14 @@ exception::~exception() {
 	}
 }
 
-const exception & exception::operator =(const exception &e) {
+exception & exception::operator =(const exception &e) {
 	if (nullptr != _message) {
 		delete _message;
 	}
 	_message = strcpy(new char[strlen(e._message)], e._message);
 	return *this;
 }
-const exception & exception::operator =(exception &&e) {
+exception & exception::operator =(exception &&e) {
 	if (nullptr != _message) {
 		delete _message;
 	}
