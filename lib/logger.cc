@@ -58,8 +58,28 @@ void logger::log(level l, const char * message) {
 	buffer << put_time(m, "%Y-%m-%d %H:%M:%S %z ") << setw(3) << setfill('0')
 			<< ms.count() % 1000;
 
-	buffer << " - " << loggerImpl::cast(_implementation)->_name << " : "
-			<< message;
+	switch (l) {
+	case FATAL:
+		buffer << " [FATAL]\t";
+		break;
+	case ERROR:
+		buffer << " [ERROR]\t";
+		break;
+	case WARN:
+		buffer << " [WARN]\t";
+		break;
+	case INFO:
+		buffer << " [INFO]\t";
+		break;
+	case DEBUG:
+		buffer << " [DEBUG]\t";
+		break;
+	case TRACE:
+		buffer << " [TRACE]\t";
+		break;
+	}
+
+	buffer << loggerImpl::cast(_implementation)->_name << " : " << message;
 
 	cout << buffer.str() << endl;
 }
