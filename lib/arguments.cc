@@ -109,6 +109,7 @@ arguments & arguments::parse(int argc, char **argv) {
 				} else {
 					argumentsImpl::cast(_implementation)->_values[name] =
 							NONE;
+					--i;
 				}
 			}
 		} else if (0 == s.find(ALIAS_PREFIX)) {
@@ -132,6 +133,7 @@ arguments & arguments::parse(int argc, char **argv) {
 				} else {
 					argumentsImpl::cast(_implementation)->_values[name] =
 							NONE;
+					--i;
 				}
 			}
 		} else {
