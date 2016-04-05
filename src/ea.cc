@@ -12,6 +12,7 @@ int main(int argc, char *argv[]) {
 	ea::arguments args;
 
 	// configure
+	logger.fatal("TODO");
 	args.configure("name", "n", args.TYPE_VALUE);
 	args.configure("daemon", "d", args.TYPE_FLAG);
 	args.configure("port", "p", args.TYPE_CONFIG);
