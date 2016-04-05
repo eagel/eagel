@@ -6,6 +6,7 @@
  */
 #include "exception.hh"
 #include "arguments.hh"
+#include "logger.hh"
 
 namespace ea {
 

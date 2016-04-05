@@ -1,13 +1,12 @@
 #include <eagel.hh>
 
-#include <iostream>
+#include <string>
+
+ea::logger logger("ea");
 
 int main(int argc, char *argv[]) {
 	// initialize the library
 	ea::eagel::initialize();
-
-	// print version information
-	std::cout << ea::eagel::name() << " " << ea::eagel::version() << std::endl;
 
 	// parse arguments
 	ea::arguments args;
@@ -24,12 +23,14 @@ int main(int argc, char *argv[]) {
 	if (0 != args.errorSize()) {
 		// show errors
 		for (int i = 0; i < args.errorSize(); ++i) {
-			std::cout << args.errorName(i) << ": " << args.errorMessage(i)
-					<< std::endl;
+			logger.fatal(
+					(std::string(args.errorName(i)) + ": "
+							+ std::string(args.errorMessage(i))).c_str());
 		}
 	} else {
 		// show arguments
-		std::cout << args.value("name") << std::endl;
+		logger.fatal("TODO");
 	}
+
 	return 0;
 }
