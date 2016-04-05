@@ -80,8 +80,11 @@ void logger::log(level l, const char * message) {
 	}
 
 	buffer << loggerImpl::cast(_implementation)->_name << " : " << message;
-
-	cout << buffer.str() << endl;
+	if (l > WARN) {
+		cout << buffer.str() << endl;
+	}else{
+		cerr << buffer.str() << endl;
+	}
 }
 
 } /* namespace ea */
