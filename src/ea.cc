@@ -16,18 +16,10 @@ void version() {
 	cout << ea::eagel::name() << " " << ea::eagel::version() << endl;
 }
 
-bool errors(const ea::arguments & args) {
-	if (args.errorSize() > 0) {
-		cerr << "Errors:" << endl;
-	}
-
+void errors(const ea::arguments & args) {
 	for (int i = 0; i < args.errorSize(); ++i) {
-		cerr << "\t" << args.errorName(i) << "\t:" << args.errorMessage(i) << endl;
-	}
-	if (args.errorSize() > 0) {
-		return true;
-	} else {
-		return false;
+		cerr << "\t" << args.errorName(i) << "\t:" << args.errorMessage(i)
+				<< endl;
 	}
 }
 
@@ -38,6 +30,7 @@ int main(int argc, char *argv[]) {
 	// configure arguments
 	ea::arguments args;
 	args.configure("command", "c", ea::arguments::TYPE_VALUE, "help");
+	// TODO add command
 
 	// parse arguments
 	args.parse(argc, argv);
@@ -45,11 +38,22 @@ int main(int argc, char *argv[]) {
 	if (string(args["command"]) == string("help")) {
 		usage();
 	} else if (string(args["command"]) == string("version")) {
-		if (errors(args)) {
+		if (args.errorSize() > 0) {
+			cerr << "Errors:" << endl;
+			errors(args);
 			usage();
-		}else{
+		} else {
 			version();
 		}
+	}
+
+	// TODO add command
+
+	else {
+		cerr << "Errors:" << endl;
+		cerr << "\t" << args["command"] << "\t:" << "Unknown command" << endl;
+		errors(args);
+		usage();
 	}
 
 	// destroy the library
