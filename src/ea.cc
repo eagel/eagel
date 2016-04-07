@@ -7,9 +7,10 @@ using namespace std;
 
 void usage() {
 	cout << "Usage: ea [command] [options] [command arguments]" << endl;
-	cout << "Command:" << endl;
-	cout << "\thelp\t: display the help information" << endl;
-	cout << "\tversion\t: display the version information" << endl;
+	cout << "Commands:" << endl;
+	cout << "\th, help\t\t: display the help information" << endl;
+	cout << "\tv, version\t: display the version information" << endl;
+	cout << "\td, daemon\t: display the version information" << endl;
 }
 
 void version() {
@@ -30,20 +31,31 @@ int main(int argc, char *argv[]) {
 	// configure arguments
 	ea::arguments args;
 	args.configure("command", "c", ea::arguments::TYPE_VALUE, "help");
-	// TODO add command
+	// TODO add option
 
 	// parse arguments
 	args.parse(argc, argv);
 
-	if (string(args["command"]) == string("help")) {
+	if (string(args["command"]) == string("help")
+			|| string(args["command"]) == string("h")) {
 		usage();
-	} else if (string(args["command"]) == string("version")) {
+	} else if (string(args["command"]) == string("version")
+			|| string(args["command"]) == string("v")) {
 		if (args.errorSize() > 0) {
 			cerr << "Errors:" << endl;
 			errors(args);
 			usage();
 		} else {
 			version();
+		}
+	} else if (string(args["command"]) == string("daemon")
+			|| string(args["command"]) == string("d")) {
+		if (args.errorSize() > 0) {
+			cerr << "Errors:" << endl;
+			errors(args);
+			usage();
+		} else {
+			// TODO start daemon
 		}
 	}
 
