@@ -1,37 +1,59 @@
 #include <eagel.hh>
 
+#include <iostream>
 #include <string>
 
-ea::logger logger("ea");
+using namespace std;
+
+void usage() {
+	cout << "Usage: ea [command] [options] [command arguments]" << endl;
+	cout << "Command:" << endl;
+	cout << "\thelp\t: display the help information" << endl;
+	cout << "\tversion\t: display the version information" << endl;
+}
+
+void version() {
+	cout << ea::eagel::name() << " " << ea::eagel::version() << endl;
+}
+
+bool errors(const ea::arguments & args) {
+	if (args.errorSize() > 0) {
+		cerr << "Errors:" << endl;
+	}
+
+	for (int i = 0; i < args.errorSize(); ++i) {
+		cerr << "\t" << args.errorName(i) << "\t:" << args.errorMessage(i) << endl;
+	}
+	if (args.errorSize() > 0) {
+		return true;
+	} else {
+		return false;
+	}
+}
 
 int main(int argc, char *argv[]) {
 	// initialize the library
 	ea::eagel::initialize();
 
-	// parse arguments
+	// configure arguments
 	ea::arguments args;
+	args.configure("command", "c", ea::arguments::TYPE_VALUE, "help");
 
-	// configure
-	logger.fatal("TODO");
-	args.configure("name", "n", args.TYPE_VALUE);
-	args.configure("daemon", "d", args.TYPE_FLAG);
-	args.configure("port", "p", args.TYPE_CONFIG);
-
-	// parse
+	// parse arguments
 	args.parse(argc, argv);
 
-	// show result
-	if (0 != args.errorSize()) {
-		// show errors
-		for (int i = 0; i < args.errorSize(); ++i) {
-			logger.fatal(
-					(std::string(args.errorName(i)) + ": "
-							+ std::string(args.errorMessage(i))).c_str());
+	if (string(args["command"]) == string("help")) {
+		usage();
+	} else if (string(args["command"]) == string("version")) {
+		if (errors(args)) {
+			usage();
+		}else{
+			version();
 		}
-	} else {
-		// show arguments
-		logger.fatal("TODO");
 	}
+
+	// destroy the library
+	ea::eagel::destroy();
 
 	return 0;
 }

@@ -21,6 +21,7 @@ public :
 
 	static void initialize();
 	static bool isInitialized();
+	static void destroy();
 };
 
 } /* namespace ea */

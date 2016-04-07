@@ -28,16 +28,20 @@ public:
 	arguments & operator=(arguments && args);
 
 	arguments & configure(const char * name, const char * alias, type_t type);
+	arguments & configure(const char * name, const char * alias, type_t type,
+			const char * default_value);
 
 	arguments & parse(int argc, char **argv);
+	arguments & clean();
+	arguments & reset();
 
-	const char * operator[](const char * name);
-	const char * value(const char * name);
-	const char * name();
+	const char * operator[](const char * name) const;
+	const char * value(const char * name) const;
+	const char * name() const;
 
-	int errorSize();
-	const char * errorName(int index);
-	const char * errorMessage(int index);
+	int errorSize() const;
+	const char * errorName(int index) const;
+	const char * errorMessage(int index) const;
 };
 
 } /* namespace ea */

@@ -46,6 +46,19 @@ void eagel::initialize() {
 	_intialized = true;
 }
 
+void eagel::destroy(){
+	if(_intialized){
+		_name = nullptr;
+		_version = nullptr;
+		_majorVersion = -1;
+		_minorVersion = -1;
+		_microVersion = -1;
+	}else{
+		throw exception("not initialized.");
+	}
+	_intialized = false;
+}
+
 bool eagel::isInitialized() {
 	return _intialized;
 }
