@@ -3,6 +3,7 @@
 #include <map>
 #include <vector>
 #include <string>
+#include <sstream>
 #include <algorithm>
 
 #include "exception.hh"
@@ -85,7 +86,27 @@ arguments & arguments::configure(const char * name, const char * alias,
 	if (TYPE_VALUE != type && TYPE_FLAG != type && TYPE_CONFIG != type) {
 		throw exception("unknown configuration type");
 	}
+
+	for (string s : argumentsImpl::cast(_implementation)->_names) {
+		if (s == string(name)) {
+			stringstream ss;
+			ss << "The name \"";
+			ss << name;
+			ss << "\" already exist.";
+			throw exception(ss.str().c_str());
+		}
+	}
+
 	argumentsImpl::cast(_implementation)->_names.push_back(name);
+
+	if (argumentsImpl::cast(_implementation)->_aliases[alias] != "") {
+		stringstream ss;
+		ss << "The alias \"";
+		ss << alias;
+		ss << "\" already exist.";
+		throw exception(ss.str().c_str());
+	}
+
 	argumentsImpl::cast(_implementation)->_aliases[alias] = name;
 	argumentsImpl::cast(_implementation)->_types[name] = type;
 	argumentsImpl::cast(_implementation)->_defaults[name] = default_value;
@@ -192,25 +213,25 @@ arguments & arguments::reset() {
 	return *this;
 }
 
-const char * arguments::operator[](const char * name) const{
+const char * arguments::operator[](const char * name) const {
 	return value(name);
 }
 
-const char * arguments::value(const char * name) const{
+const char * arguments::value(const char * name) const {
 	return argumentsImpl::cast(_implementation)->_values[name].c_str();
 }
 
-const char * arguments::name() const{
+const char * arguments::name() const {
 	return argumentsImpl::cast(_implementation)->_name.c_str();
 }
 
-int arguments::errorSize() const{
+int arguments::errorSize() const {
 	return argumentsImpl::cast(_implementation)->_errorsNames.size();
 }
-const char * arguments::errorName(int index) const{
+const char * arguments::errorName(int index) const {
 	return argumentsImpl::cast(_implementation)->_errorsNames.at(index).c_str();
 }
-const char * arguments::errorMessage(int index) const{
+const char * arguments::errorMessage(int index) const {
 	return argumentsImpl::cast(_implementation)->_errorsMessages.at(index).c_str();
 }
 
