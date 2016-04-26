@@ -46,14 +46,14 @@ void eagel::initialize() {
 	_intialized = true;
 }
 
-void eagel::destroy(){
-	if(_intialized){
+void eagel::destroy() {
+	if (_intialized) {
 		_name = nullptr;
 		_version = nullptr;
 		_majorVersion = -1;
 		_minorVersion = -1;
 		_microVersion = -1;
-	}else{
+	} else {
 		throw exception("not initialized.");
 	}
 	_intialized = false;
@@ -81,6 +81,14 @@ int eagel::minorVersion() {
 
 int eagel::microVersion() {
 	return _microVersion;
+}
+
+daemon * eagel::createDaemon(char * upstream, char *downstream) {
+	if (_intialized) {
+		return daemon::create(upstream, downstream);
+	} else {
+		throw exception("not initialized.");
+	}
 }
 
 } /* namespace ea */

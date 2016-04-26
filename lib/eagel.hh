@@ -7,6 +7,7 @@
 #include "exception.hh"
 #include "arguments.hh"
 #include "logger.hh"
+#include "daemon.hh"
 
 namespace ea {
 
@@ -22,6 +23,9 @@ public :
 	static void initialize();
 	static bool isInitialized();
 	static void destroy();
+
+	static daemon * createDaemon(char * upstream, char *downstream);
+
 };
 
 } /* namespace ea */

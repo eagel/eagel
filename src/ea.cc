@@ -10,7 +10,10 @@ void usage() {
 	cout << "Commands:" << endl;
 	cout << "\th, help\t\t: display the help information" << endl;
 	cout << "\tv, version\t: display the version information" << endl;
-	cout << "\td, daemon\t: display the version information" << endl;
+	cout << "\td, daemon\t: startup in daemon mode" << endl;
+	cout << "Options:" << endl;
+	cout << "\t-u,--upstream\t: the upstream network configuration." << endl;
+	cout << "\t-d,--downstream\t: the downstream network configuration." << endl;
 }
 
 void version() {
@@ -24,6 +27,10 @@ void errors(const ea::arguments & args) {
 	}
 }
 
+void daemon(const char *upstream,const char *downstream) {
+	cout << "start daemon... TODO" << endl;
+}
+
 int main(int argc, char *argv[]) {
 	// initialize the library
 	ea::eagel::initialize();
@@ -31,6 +38,10 @@ int main(int argc, char *argv[]) {
 	// configure arguments
 	ea::arguments args;
 	args.configure("command", "c", ea::arguments::TYPE_VALUE, "help");
+	args.configure("upstream", "u", ea::arguments::TYPE_CONFIG,
+			"udp:localhost:44886");
+	args.configure("downstream", "d", ea::arguments::TYPE_CONFIG,
+			"udp:localhost:44886");
 	// TODO add option
 
 	// parse arguments
@@ -55,7 +66,7 @@ int main(int argc, char *argv[]) {
 			errors(args);
 			usage();
 		} else {
-			// TODO start daemon
+			daemon(args["upstream"], args["downstream"]);
 		}
 	}
 
