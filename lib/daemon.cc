@@ -1,4 +1,4 @@
-#include "daemon.hh"
+#include <daemon.hh>
 
 using namespace ea;
 
@@ -8,12 +8,12 @@ class daemonImpl: public daemon {
 public:
 	daemonImpl(char * upstream, char *downstream);
 
-	virtual ~daemonImpl() override;
+	virtual ~daemonImpl();
 	virtual void startup() override;
 	virtual void shutdown() override;
 };
 
-daemonImpl::daemonImpl(char * upstream, char *downstream){
+daemonImpl::daemonImpl(char * upstream, char *downstream) {
 
 }
 
@@ -32,7 +32,14 @@ void daemonImpl::shutdown() {
 }
 
 namespace ea {
+
+daemon::~daemon(){
+
+}
+
 daemon * daemon::create(char * upstream, char *downstream) {
 	return new daemonImpl(upstream, downstream);
 }
+
+
 } /* namespace ea */

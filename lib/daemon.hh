@@ -9,8 +9,8 @@ public:
 	static daemon * create(char * upstream, char *downstream);
 
 	virtual ~daemon();
-	virtual void startup();
-	virtual void shutdown();
+	virtual void startup() = 0;
+	virtual void shutdown() = 0;
 };
 
 } /* namespace ea */
