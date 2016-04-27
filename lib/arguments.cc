@@ -11,7 +11,7 @@
 using namespace std;
 
 namespace {
-class argumentsImpl {
+class arguments_i {
 public:
 	string _name;
 	vector<string> _names;
@@ -22,8 +22,8 @@ public:
 	vector<string> _errorsNames;
 	vector<string> _errorsMessages;
 
-	static argumentsImpl * cast(void *implementation) {
-		return static_cast<argumentsImpl *>(implementation);
+	static arguments_i * cast(void *implementation) {
+		return static_cast<arguments_i *>(implementation);
 	}
 };
 
@@ -36,12 +36,12 @@ const char * const arguments::FALSE = "false";
 const char * const arguments::NONE = "";
 
 arguments::arguments() :
-		_implementation(new argumentsImpl()) {
+		_implementation(new arguments_i()) {
 }
 
 arguments::arguments(const arguments & args) :
 		_implementation(
-				new argumentsImpl(*argumentsImpl::cast(args._implementation))) {
+				new arguments_i(*arguments_i::cast(args._implementation))) {
 }
 
 arguments::arguments(arguments && args) :
@@ -51,17 +51,17 @@ arguments::arguments(arguments && args) :
 
 arguments::~arguments() {
 	if (nullptr != _implementation) {
-		delete argumentsImpl::cast(_implementation);
+		delete arguments_i::cast(_implementation);
 	}
 }
 
 arguments & arguments::operator=(const arguments & args) {
-	(*argumentsImpl::cast(_implementation)) = *argumentsImpl::cast(
+	(*arguments_i::cast(_implementation)) = *arguments_i::cast(
 			args._implementation);
 	return *this;
 }
 arguments & arguments::operator=(arguments && args) {
-	delete argumentsImpl::cast(_implementation);
+	delete arguments_i::cast(_implementation);
 	_implementation = args._implementation;
 	args._implementation = nullptr;
 	return *this;
@@ -87,7 +87,7 @@ arguments & arguments::configure(const char * name, const char * alias,
 		throw exception("unknown configuration type");
 	}
 
-	for (string s : argumentsImpl::cast(_implementation)->_names) {
+	for (string s : arguments_i::cast(_implementation)->_names) {
 		if (s == string(name)) {
 			stringstream ss;
 			ss << "The name \"";
@@ -97,9 +97,9 @@ arguments & arguments::configure(const char * name, const char * alias,
 		}
 	}
 
-	argumentsImpl::cast(_implementation)->_names.push_back(name);
+	arguments_i::cast(_implementation)->_names.push_back(name);
 
-	if (argumentsImpl::cast(_implementation)->_aliases[alias] != "") {
+	if (arguments_i::cast(_implementation)->_aliases[alias] != "") {
 		stringstream ss;
 		ss << "The alias \"";
 		ss << alias;
@@ -107,9 +107,9 @@ arguments & arguments::configure(const char * name, const char * alias,
 		throw exception(ss.str().c_str());
 	}
 
-	argumentsImpl::cast(_implementation)->_aliases[alias] = name;
-	argumentsImpl::cast(_implementation)->_types[name] = type;
-	argumentsImpl::cast(_implementation)->_defaults[name] = default_value;
+	arguments_i::cast(_implementation)->_aliases[alias] = name;
+	arguments_i::cast(_implementation)->_types[name] = type;
+	arguments_i::cast(_implementation)->_defaults[name] = default_value;
 	return *this;
 }
 
@@ -118,66 +118,66 @@ arguments & arguments::parse(int argc, char **argv) {
 	clean();
 
 	// parse
-	argumentsImpl::cast(_implementation)->_name = argv[0];
+	arguments_i::cast(_implementation)->_name = argv[0];
 	vector<char *> args(argv + 1, argv + argc);
 	int index = 0;
 	for (vector<char *>::iterator i = args.begin(); i != args.end(); ++i) {
 		string s = *i;
 		if (0 == s.find(NAME_PREFIX)) {
 			string name = s.substr(2);
-			type_t type = argumentsImpl::cast(_implementation)->_types[name];
+			type_t type = arguments_i::cast(_implementation)->_types[name];
 			if (0 == type) {
-				argumentsImpl::cast(_implementation)->_errorsNames.push_back(s);
-				argumentsImpl::cast(_implementation)->_errorsMessages.push_back(
+				arguments_i::cast(_implementation)->_errorsNames.push_back(s);
+				arguments_i::cast(_implementation)->_errorsMessages.push_back(
 						"Unknown argument");
 			} else if (TYPE_FLAG == type) {
-				argumentsImpl::cast(_implementation)->_values[name] = TRUE;
+				arguments_i::cast(_implementation)->_values[name] = TRUE;
 			} else {
 				if (++i != args.end()) {
-					argumentsImpl::cast(_implementation)->_values[name] = *i;
+					arguments_i::cast(_implementation)->_values[name] = *i;
 				} else {
-					argumentsImpl::cast(_implementation)->_values[name] = NONE;
+					arguments_i::cast(_implementation)->_values[name] = NONE;
 					--i;
 				}
 			}
 		} else if (0 == s.find(ALIAS_PREFIX)) {
 			string alias = s.substr(1);
-			string name = argumentsImpl::cast(_implementation)->_aliases[alias];
-			type_t type = argumentsImpl::cast(_implementation)->_types[name];
+			string name = arguments_i::cast(_implementation)->_aliases[alias];
+			type_t type = arguments_i::cast(_implementation)->_types[name];
 			if (0 == type) {
-				argumentsImpl::cast(_implementation)->_errorsNames.push_back(s);
-				argumentsImpl::cast(_implementation)->_errorsMessages.push_back(
+				arguments_i::cast(_implementation)->_errorsNames.push_back(s);
+				arguments_i::cast(_implementation)->_errorsMessages.push_back(
 						"Unknown argument");
 			} else if (TYPE_FLAG == type) {
-				argumentsImpl::cast(_implementation)->_values[name] = TRUE;
+				arguments_i::cast(_implementation)->_values[name] = TRUE;
 			} else {
 				if (++i != args.end()) {
-					argumentsImpl::cast(_implementation)->_values[name] = *i;
+					arguments_i::cast(_implementation)->_values[name] = *i;
 				} else {
-					argumentsImpl::cast(_implementation)->_values[name] = NONE;
+					arguments_i::cast(_implementation)->_values[name] = NONE;
 					--i;
 				}
 			}
 		} else {
 			// next index
-			for (; index < argumentsImpl::cast(_implementation)->_names.size();
+			for (; index < arguments_i::cast(_implementation)->_names.size();
 					++index) {
 				string name =
-						argumentsImpl::cast(_implementation)->_names[index];
-				type_t type = argumentsImpl::cast(_implementation)->_types[name];
+						arguments_i::cast(_implementation)->_names[index];
+				type_t type = arguments_i::cast(_implementation)->_types[name];
 				if (TYPE_VALUE == type) {
 					break;
 				}
 			}
 
-			if (index >= argumentsImpl::cast(_implementation)->_names.size()) {
-				argumentsImpl::cast(_implementation)->_errorsNames.push_back(s);
-				argumentsImpl::cast(_implementation)->_errorsMessages.push_back(
+			if (index >= arguments_i::cast(_implementation)->_names.size()) {
+				arguments_i::cast(_implementation)->_errorsNames.push_back(s);
+				arguments_i::cast(_implementation)->_errorsMessages.push_back(
 						"Unknown argument");
 			} else {
 				string name =
-						argumentsImpl::cast(_implementation)->_names[index];
-				argumentsImpl::cast(_implementation)->_values[name] = s;
+						arguments_i::cast(_implementation)->_names[index];
+				arguments_i::cast(_implementation)->_values[name] = s;
 				++index;
 			}
 		}
@@ -187,15 +187,15 @@ arguments & arguments::parse(int argc, char **argv) {
 
 arguments & arguments::clean() {
 	// set defaults
-	argumentsImpl::cast(_implementation)->_name = "";
-	for (string name : argumentsImpl::cast(_implementation)->_names) {
-		argumentsImpl::cast(_implementation)->_values[name] =
-				argumentsImpl::cast(_implementation)->_defaults[name];
+	arguments_i::cast(_implementation)->_name = "";
+	for (string name : arguments_i::cast(_implementation)->_names) {
+		arguments_i::cast(_implementation)->_values[name] =
+				arguments_i::cast(_implementation)->_defaults[name];
 	}
 
 	// clean error message
-	argumentsImpl::cast(_implementation)->_errorsNames.clear();
-	argumentsImpl::cast(_implementation)->_errorsMessages.clear();
+	arguments_i::cast(_implementation)->_errorsNames.clear();
+	arguments_i::cast(_implementation)->_errorsMessages.clear();
 
 	return *this;
 }
@@ -205,10 +205,10 @@ arguments & arguments::reset() {
 	clean();
 
 	// reset configuration
-	argumentsImpl::cast(_implementation)->_names.clear();
-	argumentsImpl::cast(_implementation)->_types.clear();
-	argumentsImpl::cast(_implementation)->_aliases.clear();
-	argumentsImpl::cast(_implementation)->_defaults.clear();
+	arguments_i::cast(_implementation)->_names.clear();
+	arguments_i::cast(_implementation)->_types.clear();
+	arguments_i::cast(_implementation)->_aliases.clear();
+	arguments_i::cast(_implementation)->_defaults.clear();
 
 	return *this;
 }
@@ -218,21 +218,21 @@ const char * arguments::operator[](const char * name) const {
 }
 
 const char * arguments::value(const char * name) const {
-	return argumentsImpl::cast(_implementation)->_values[name].c_str();
+	return arguments_i::cast(_implementation)->_values[name].c_str();
 }
 
 const char * arguments::name() const {
-	return argumentsImpl::cast(_implementation)->_name.c_str();
+	return arguments_i::cast(_implementation)->_name.c_str();
 }
 
 int arguments::errorSize() const {
-	return argumentsImpl::cast(_implementation)->_errorsNames.size();
+	return arguments_i::cast(_implementation)->_errorsNames.size();
 }
 const char * arguments::errorName(int index) const {
-	return argumentsImpl::cast(_implementation)->_errorsNames.at(index).c_str();
+	return arguments_i::cast(_implementation)->_errorsNames.at(index).c_str();
 }
 const char * arguments::errorMessage(int index) const {
-	return argumentsImpl::cast(_implementation)->_errorsMessages.at(index).c_str();
+	return arguments_i::cast(_implementation)->_errorsMessages.at(index).c_str();
 }
 
 } /* namespace ea */

@@ -8,28 +8,28 @@ namespace {
 
 ea::logger logger("ea::daemon");
 
-class daemonImpl: public ea::daemon {
+class daemon_i: public ea::daemon {
 public:
-	daemonImpl(char * upstream, char *downstream);
+	daemon_i(char * upstream, char *downstream);
 
-	virtual ~daemonImpl();
+	virtual ~daemon_i();
 	virtual void startup() override;
 	virtual void shutdown() override;
 };
 
-daemonImpl::daemonImpl(char * upstream, char *downstream) {
+daemon_i::daemon_i(char * upstream, char *downstream) {
 	// TODO
 }
 
-daemonImpl::~daemonImpl() {
+daemon_i::~daemon_i() {
 	// TODO
 }
 
-void daemonImpl::startup() {
+void daemon_i::startup() {
 	// TODO
 }
 
-void daemonImpl::shutdown() {
+void daemon_i::shutdown() {
 	// TODO
 }
 
@@ -43,7 +43,7 @@ daemon::~daemon() {
 
 daemon * daemon::create(char * upstream, char *downstream) {
 	// TODO
-	return new daemonImpl(upstream, downstream);
+	return new daemon_i(upstream, downstream);
 }
 
 } /* namespace ea */

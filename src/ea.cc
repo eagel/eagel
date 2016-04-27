@@ -1,7 +1,8 @@
-#include <arguments.hh>
-#include <eagel.hh>
 #include <iostream>
 #include <string>
+
+#include <arguments.hh>
+#include <eagel.hh>
 
 using namespace std;
 
