@@ -1,5 +1,5 @@
+#include <arguments.hh>
 #include <eagel.hh>
-
 #include <iostream>
 #include <string>
 
@@ -13,7 +13,9 @@ void usage() {
 	cout << "\td, daemon\t: startup in daemon mode" << endl;
 	cout << "Options:" << endl;
 	cout << "\t-u,--upstream\t: the upstream network configuration." << endl;
-	cout << "\t-d,--downstream\t: the downstream network configuration." << endl;
+	cout << "\t-d,--downstream\t: the downstream network configuration."
+			<< endl;
+	cout << "\t-l,--log\t: the log level 0-5." << endl;
 }
 
 void version() {
@@ -27,7 +29,7 @@ void errors(const ea::arguments & args) {
 	}
 }
 
-void daemon(const char *upstream,const char *downstream) {
+void daemon(const char *upstream, const char *downstream) {
 	cout << "start daemon... TODO" << endl;
 }
 
@@ -49,6 +51,10 @@ int main(int argc, char *argv[]) {
 
 	if (string(args["command"]) == string("help")
 			|| string(args["command"]) == string("h")) {
+		if (args.errorSize() > 0) {
+			cerr << "Errors:" << endl;
+			errors(args);
+		}
 		usage();
 	} else if (string(args["command"]) == string("version")
 			|| string(args["command"]) == string("v")) {

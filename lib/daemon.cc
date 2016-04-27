@@ -1,10 +1,14 @@
-#include <daemon.hh>
+#include "daemon.hh"
 
-using namespace ea;
+#include <string>
+
+#include "logger.hh"
 
 namespace {
 
-class daemonImpl: public daemon {
+ea::logger logger("ea::daemon");
+
+class daemonImpl: public ea::daemon {
 public:
 	daemonImpl(char * upstream, char *downstream);
 
@@ -14,7 +18,7 @@ public:
 };
 
 daemonImpl::daemonImpl(char * upstream, char *downstream) {
-
+	// TODO
 }
 
 daemonImpl::~daemonImpl() {
@@ -33,13 +37,13 @@ void daemonImpl::shutdown() {
 
 namespace ea {
 
-daemon::~daemon(){
-
+daemon::~daemon() {
+	// TODO
 }
 
 daemon * daemon::create(char * upstream, char *downstream) {
+	// TODO
 	return new daemonImpl(upstream, downstream);
 }
-
 
 } /* namespace ea */
