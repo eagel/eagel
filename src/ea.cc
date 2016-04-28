@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <future>
 
 #include <unistd.h>
 
@@ -32,8 +33,28 @@ void errors(const ea::arguments & args) {
 	}
 }
 
+std::promise<int> daemon_promise;
+
+void daemon_signal(int i) {
+	daemon_promise.set_value(i);
+}
+
 void daemon(const char *upstream, const char *downstream) {
-	cout << "start daemon... TODO" << " - " << getpid() << endl;
+	ea::daemon * d = ea::eagel::createDaemon(upstream, downstream);
+
+	std::future<int> f = daemon_promise.get_future();
+
+	signal(SIGHUP, daemon_signal);
+	signal(SIGINT, daemon_signal);
+	signal(SIGTERM, daemon_signal);
+
+	d->startup();
+
+	int s = f.get();
+
+	d->shutdown();
+
+	delete d;
 }
 
 int main(int argc, char *argv[]) {

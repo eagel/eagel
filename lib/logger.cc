@@ -78,7 +78,7 @@ void logger::log(level l, const char * message) {
 		break;
 	}
 
-	buffer << loggerImpl::cast(_implementation)->_name << " : " << message;
+	buffer << loggerImpl::cast(_implementation)->_name << " - " << message;
 	if (l > WARN) {
 		cout << buffer.str() << endl;
 	}else{

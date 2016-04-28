@@ -12,7 +12,7 @@
 namespace ea {
 
 class eagel {
-public :
+public:
 	static const char * name();
 
 	static const char * version();
@@ -24,7 +24,7 @@ public :
 	static bool isInitialized();
 	static void destroy();
 
-	static daemon * createDaemon(char * upstream, char *downstream);
+	static daemon * createDaemon(const char * upstream, const char *downstream);
 
 };
 

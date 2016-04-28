@@ -88,7 +88,7 @@ int eagel::microVersion() {
 	return _microVersion;
 }
 
-daemon * eagel::createDaemon(char * upstream, char *downstream) {
+daemon * eagel::createDaemon(const char * upstream, const char *downstream) {
 	if (_intialized) {
 		return daemon::create(upstream, downstream);
 	} else {
