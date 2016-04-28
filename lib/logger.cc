@@ -40,7 +40,6 @@ logger::~logger() {
 
 void logger::log(level l, const char * message) {
 	if (l > _level) {
-		cout << "return" << endl;
 		return;
 	}
 

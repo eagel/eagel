@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 
+#include <unistd.h>
+
 #include <arguments.hh>
 #include <eagel.hh>
 
@@ -31,7 +33,7 @@ void errors(const ea::arguments & args) {
 }
 
 void daemon(const char *upstream, const char *downstream) {
-	cout << "start daemon... TODO" << endl;
+	cout << "start daemon... TODO" << " - " << getpid() << endl;
 }
 
 int main(int argc, char *argv[]) {
@@ -45,10 +47,14 @@ int main(int argc, char *argv[]) {
 			"udp:localhost:44886");
 	args.configure("downstream", "d", ea::arguments::TYPE_CONFIG,
 			"udp:localhost:44886");
+	args.configure("log", "l", ea::arguments::TYPE_CONFIG, "0");
 	// TODO add option
 
 	// parse arguments
 	args.parse(argc, argv);
+
+	// configure log level
+	ea::logger::setLevel(static_cast<ea::logger::level>(atoi(args["log"])));
 
 	if (string(args["command"]) == string("help")
 			|| string(args["command"]) == string("h")) {

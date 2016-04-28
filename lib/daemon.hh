@@ -10,7 +10,13 @@ public:
 
 	virtual ~daemon();
 	virtual void startup() = 0;
+	virtual bool isStartup() = 0;
 	virtual void shutdown() = 0;
+
+	/*
+	 * release all daemons
+	 */
+	static void release();
 };
 
 } /* namespace ea */

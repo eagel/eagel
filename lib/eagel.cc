@@ -9,6 +9,8 @@ using namespace std;
 
 namespace {
 
+ea::logger log("ea::eagel");
+
 bool _intialized = false;
 
 const char *_name = nullptr;
@@ -25,6 +27,7 @@ void eagel::initialize() {
 	if (_intialized) {
 		throw exception("already initialized.");
 	} else {
+		log.debug("initialize eagel library");
 		// name
 		_name = PACKAGE_NAME;
 
@@ -48,6 +51,8 @@ void eagel::initialize() {
 
 void eagel::destroy() {
 	if (_intialized) {
+		log.debug("release eagel library");
+		daemon::release();
 		_name = nullptr;
 		_version = nullptr;
 		_majorVersion = -1;
