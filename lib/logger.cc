@@ -59,22 +59,22 @@ void logger::log(level l, const char * message) {
 
 	switch (l) {
 	case FATAL:
-		buffer << " [FATAL]\t";
+		buffer << " [FATAL] ";
 		break;
 	case ERROR:
-		buffer << " [ERROR]\t";
+		buffer << " [ERROR] ";
 		break;
 	case WARN:
-		buffer << " [WARN]\t";
+		buffer << " [WARN] ";
 		break;
 	case INFO:
-		buffer << " [INFO]\t";
+		buffer << " [INFO] ";
 		break;
 	case DEBUG:
-		buffer << " [DEBUG]\t";
+		buffer << " [DEBUG] ";
 		break;
 	case TRACE:
-		buffer << " [TRACE]\t";
+		buffer << " [TRACE] ";
 		break;
 	}
 
