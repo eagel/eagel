@@ -43,8 +43,7 @@ daemon_i::daemon_i(const char * upstream, const char *downstream) :
 	log.debug(("create daemon: " + _id).c_str());
 
 	log.debug((std::string("upstream: ") + _upstream.toString()).c_str());
-	log.debug((std::string("downstream: ") + _upstream.toString()).c_str());
-	// TODO
+	log.debug((std::string("downstream: ") + _downstream.toString()).c_str());
 }
 
 daemon_i::~daemon_i() {
