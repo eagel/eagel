@@ -14,24 +14,24 @@ private:
 	void * _implementation;
 public:
 	address();
-//	address(protocol_t protocol);
-//	address(protocol_t protocol, const char * host);
-//	address(protocol_t protocol, const char * host, unsigned short port);
+	address(protocol_t protocol);
+	address(protocol_t protocol, const char * host);
+	address(protocol_t protocol, const char * host, unsigned short port);
 	address(const char *description);
-//	address(const address & address);
-//	address(const address && address);
+	address(const address & addr);
+	address(address && addr);
 	virtual ~address();
 
-//	address & operator=(const address & address);
-//	address & operator=(const address && address);
+	address & operator=(const address & addr);
+	address & operator=(address && addr);
 
-//	protocol_t getProtocol();
-//	const char * getHost();
-//	unsigned short getPort();
+	protocol_t getProtocol();
+	const char * getHost();
+	unsigned short getPort();
 
-//	void setProtocol(protocol_t protocol);
-//	void setHost(const char *);
-//	void setPort(unsigned short port);
+	void setProtocol(protocol_t protocol);
+	void setHost(const char *host);
+	void setPort(unsigned short port);
 
 	const char * toString();
 };

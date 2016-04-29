@@ -19,6 +19,8 @@ public:
 
 	void parse(const char * description);
 
+	void refresh();
+
 	static address_i * cast(void *implementation) {
 		return static_cast<address_i *>(implementation);
 	}
@@ -59,9 +61,19 @@ void address_i::parse(const char * description) {
 	// host
 	host = d;
 
+	// set
+	_protocol = protocol;
+	_host = host;
+	_port = port;
+
+	// refresh
+	refresh();
+}
+
+void address_i::refresh() {
 	// render
 	std::stringstream s;
-	switch (protocol) {
+	switch (_protocol) {
 	case ea::address::UDP:
 		s << ea::address::PROTOCOL_UDP;
 		break;
@@ -72,14 +84,11 @@ void address_i::parse(const char * description) {
 		throw ea::exception("unknown address protocol");
 	}
 
-	s << ":" + host + ":";
-	s << port;
+	s << ":" + _host + ":";
+	s << _port;
 
 	// set
 	_description = s.str();
-	_protocol = protocol;
-	_host = host;
-	_port = port;
 }
 
 }
@@ -95,10 +104,80 @@ address::address(const char* description) :
 	address_i::cast(_implementation)->parse(description);
 }
 
+address::address(protocol_t protocol) :
+		_implementation(new address_i) {
+	address_i::cast(_implementation)->_protocol = protocol;
+	address_i::cast(_implementation)->refresh();
+}
+
+address::address(protocol_t protocol, const char * host) :
+		_implementation(new address_i) {
+	address_i::cast(_implementation)->_protocol = protocol;
+	address_i::cast(_implementation)->_host = host;
+	address_i::cast(_implementation)->refresh();
+}
+
+address::address(protocol_t protocol, const char * host, unsigned short port) :
+		_implementation(new address_i) {
+	address_i::cast(_implementation)->_protocol = protocol;
+	address_i::cast(_implementation)->_host = host;
+	address_i::cast(_implementation)->_port = port;
+	address_i::cast(_implementation)->refresh();
+}
+
+address::address(const address & addr) :
+		_implementation(new address_i(*address_i::cast(addr._implementation))) {
+}
+
+address::address(address && addr) :
+		_implementation(addr._implementation) {
+	addr._implementation = nullptr;
+}
+
 address::~address() {
 	if (nullptr != _implementation) {
 		delete address_i::cast(_implementation);
 	}
+}
+
+address & address::operator=(const address & addr) {
+	*address_i::cast(_implementation) = *address_i::cast(addr._implementation);
+	return *this;
+}
+
+address & address::operator=(address && addr) {
+	delete address_i::cast(_implementation);
+	_implementation = addr._implementation;
+	addr._implementation = nullptr;
+	return *this;
+}
+
+address::protocol_t address::getProtocol() {
+	return address_i::cast(_implementation)->_protocol;
+}
+
+const char * address::getHost() {
+	return address_i::cast(_implementation)->_host.c_str();
+}
+
+unsigned short address::getPort() {
+	return address_i::cast(_implementation)->_port;
+}
+
+void address::setProtocol(protocol_t protocol) {
+	address_i::cast(_implementation)->_protocol = protocol;
+	address_i::cast(_implementation)->refresh();
+}
+
+void address::setHost(const char *host) {
+	address_i::cast(_implementation)->_host = host;
+	address_i::cast(_implementation)->refresh();
+
+}
+
+void address::setPort(unsigned short port) {
+	address_i::cast(_implementation)->_port = port;
+	address_i::cast(_implementation)->refresh();
 }
 
 const char * address::toString() {
