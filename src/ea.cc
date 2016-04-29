@@ -1,11 +1,12 @@
+#include <arguments.hh>
+#include <daemon.hh>
+#include <eagel.hh>
+#include <logger.hh>
+#include <sys/signal.h>
+#include <cstdlib>
+#include <future>
 #include <iostream>
 #include <string>
-#include <future>
-
-#include <unistd.h>
-
-#include <arguments.hh>
-#include <eagel.hh>
 
 using namespace std;
 

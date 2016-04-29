@@ -32,7 +32,7 @@ public:
 };
 
 daemon_i::daemon_i(const char * upstream, const char *downstream) :
-		_id(), _upstream(), _downstream() {
+		_id(), _upstream(upstream), _downstream(downstream) {
 	// generate the id
 	uuid_t u;
 	uuid_string_t us;
@@ -42,14 +42,8 @@ daemon_i::daemon_i(const char * upstream, const char *downstream) :
 
 	log.debug(("create daemon: " + _id).c_str());
 
-	if (nullptr != upstream) {
-		// TODO parse address
-	}
-
-	if (nullptr != downstream) {
-		// TODO parse address
-	}
-
+	log.debug((std::string("upstream: ") + _upstream.toString()).c_str());
+	log.debug((std::string("downstream: ") + _upstream.toString()).c_str());
 	// TODO
 }
 
