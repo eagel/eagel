@@ -6,7 +6,7 @@ namespace ea {
 class daemon {
 public:
 
-	static daemon * create(const char * upstream,const char *downstream);
+	static daemon * create(const char * upstream, const char *downstream);
 
 	virtual ~daemon();
 	virtual void startup() = 0;
@@ -18,6 +18,12 @@ public:
 	 * release all daemons
 	 */
 	static void release();
+protected:
+	daemon() {
+	}
+private:
+	daemon(const daemon&) = delete;
+	daemon & operator =(const daemon&) = delete;
 };
 
 } /* namespace ea */

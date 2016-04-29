@@ -8,6 +8,7 @@
 #include "arguments.hh"
 #include "logger.hh"
 #include "daemon.hh"
+#include "address.hh"
 
 namespace ea {
 

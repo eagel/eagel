@@ -8,6 +8,7 @@
 #include <uuid/uuid.h>
 
 #include "logger.hh"
+#include "address.hh"
 
 namespace {
 
@@ -18,8 +19,8 @@ std::mutex daemon_mutex;
 
 class daemon_i: public ea::daemon {
 	std::string _id;
-	std::string _upstream;
-	std::string _downstream;
+	ea::address _upstream;
+	ea::address _downstream;
 public:
 	daemon_i(const char * upstream, const char *downstream);
 
@@ -42,11 +43,11 @@ daemon_i::daemon_i(const char * upstream, const char *downstream) :
 	log.debug(("create daemon: " + _id).c_str());
 
 	if (nullptr != upstream) {
-		_upstream = upstream;
+		// TODO parse address
 	}
 
 	if (nullptr != downstream) {
-		_downstream = downstream;
+		// TODO parse address
 	}
 
 	// TODO
