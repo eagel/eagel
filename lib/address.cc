@@ -51,9 +51,8 @@ void address_i::parse(const char * description) {
 	// port
 	std::size_t pi = std::distance(d.begin(),
 			std::find(d.begin(), d.end(), ':'));
-	std::string pp = d.substr(pi, d.size());
 	if (pi != d.size()) {
-		port = std::atoi(pp.substr(1, pp.size()).c_str());
+		port = std::atoi(d.substr(pi + 1, d.size()).c_str());
 		d = d.substr(0, pi);
 	}
 
@@ -77,7 +76,7 @@ void address_i::parse(const char * description) {
 	s << port;
 
 	// set
-	s.str(_description);
+	_description = s.str();
 	_protocol = protocol;
 	_host = host;
 	_port = port;
